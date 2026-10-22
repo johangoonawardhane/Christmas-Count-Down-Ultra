@@ -100,7 +100,7 @@ function nextChristmas(){
 }
 
 function updateCountdown(){
-  const ms=Math.max(0,nextChristmas()-Date.now());
+  const ms=Math.max(0,nextChristmas()-Date.now()-3600000);
   const d=Math.floor(ms/86400000);
   const h=Math.floor((ms%86400000)/3600000);
   const m=Math.floor((ms%3600000)/60000);
