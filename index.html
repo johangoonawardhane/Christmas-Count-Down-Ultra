@@ -4,20 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#07152f">
-<title>Christmas Wonderland 🎄</title>
+<title>Christmas Countdown Ultra 🎄</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  background: #07152f;
-  scroll-behavior: smooth;
-}
-
-body {
+html, body {
   margin: 0;
+  min-height: 100%;
   background: #07152f;
   color: white;
   font-family: Georgia, "Times New Roman", serif;
@@ -28,8 +22,8 @@ body {
   position: relative;
   width: min(100%, 900px);
   margin: 0 auto;
-  line-height: 0;
   overflow: hidden;
+  line-height: 0;
   background: #07152f;
 }
 
@@ -48,7 +42,6 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2%;
-  align-items: stretch;
 }
 
 .time {
@@ -56,40 +49,50 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  line-height: 1.1;
+  min-width: 0;
   border-radius: 12px;
-  background: rgba(5, 31, 46, 0.94);
-  border: 1px solid rgba(255, 221, 137, 0.8);
-  box-shadow: 0 0 13px #7bd7ff24;
+  background: rgba(5, 31, 46, .96);
+  border: 1px solid rgba(255, 221, 137, .85);
+  line-height: 1.1;
 }
 
 .num {
   font-family: Arial, sans-serif;
+  font-size: clamp(13px, 4vw, 36px);
   font-weight: 800;
   color: #ffdf8a;
-  font-size: clamp(13px, 4.1vw, 37px);
-  text-shadow: 0 0 10px #ffcb5a60;
   font-variant-numeric: tabular-nums;
 }
 
 .unit {
-  font: 700 clamp(5px, 0.95vw, 10px)/1.2 Arial, sans-serif;
-  letter-spacing: 1px;
-  color: #f0f5ff;
   margin-top: 5px;
+  color: #f0f5ff;
+  font: 700 clamp(5px, .95vw, 10px)/1.2 Arial, sans-serif;
+  letter-spacing: 1px;
 }
 
-.magic-button {
+.live-message {
   position: absolute;
-  height: 3.75%;
+  top: 58.3%;
+  left: 20%;
+  width: 60%;
+  color: #ffdf8a;
+  font-size: clamp(10px, 2.5vw, 22px);
+  font-weight: bold;
+  line-height: 1.2;
+  text-shadow: 0 2px 5px #15243b;
+}
+
+.art-button {
+  position: absolute;
   border: 0;
-  border-radius: 30px;
   background: transparent;
   cursor: pointer;
   color: transparent;
+  border-radius: 30px;
 }
 
-.magic-button:focus-visible {
+.art-button:focus-visible {
   outline: 3px solid #ffe5a0;
 }
 
@@ -97,12 +100,14 @@ body {
   top: 71.2%;
   left: 27.9%;
   width: 24.5%;
+  height: 3.75%;
 }
 
 .surprise-button {
   top: 71.2%;
   left: 49%;
   width: 23.8%;
+  height: 3.75%;
 }
 
 .wish-button {
@@ -112,39 +117,23 @@ body {
   height: 3.7%;
 }
 
-.live-message {
-  position: absolute;
-  top: 58.3%;
-  left: 25%;
-  width: 50%;
-  font: bold clamp(11px, 2.6vw, 23px) Georgia, serif;
-  color: #ffdf8a;
-  text-shadow: 0 2px 5px #15243b;
-  line-height: 1.2;
-}
-
 .result {
   display: none;
   position: absolute;
-  left: 25%;
-  width: 50%;
-  padding: 9px 12px;
+  left: 20%;
+  width: 60%;
+  padding: 10px;
   line-height: 1.4;
-  font-size: clamp(9px, 1.8vw, 15px);
-  background: rgba(4, 23, 39, 0.97);
+  font: clamp(10px, 1.8vw, 15px) Arial, sans-serif;
+  background: rgba(4, 23, 39, .98);
   color: #fff0c2;
   border: 1px solid #e8c36c;
   border-radius: 10px;
   z-index: 5;
 }
 
-.surprise-result {
-  top: 76%;
-}
-
-.wish-result {
-  top: 91.5%;
-}
+#surprise { top: 76%; }
+#wish { top: 91%; }
 
 .snowflake {
   position: fixed;
@@ -159,53 +148,38 @@ body {
 @keyframes fall {
   to {
     transform: translate(var(--drift), 110vh) rotate(360deg);
-    opacity: 0.12;
+    opacity: .1;
   }
 }
 
 .below {
   max-width: 720px;
-  margin: 0 auto;
-  padding: 16px 20px 30px;
+  margin: auto;
+  padding: 18px 16px 32px;
   line-height: 1.6;
   color: #dbeaff;
 }
 
-.below p {
-  margin: 8px 0;
-}
-
 .below button {
   margin: 5px;
+  padding: 11px 18px;
   border: 1px solid #ffdf8a;
   border-radius: 24px;
   background: linear-gradient(#138751, #075332);
   color: white;
-  padding: 11px 18px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.below button:hover {
-  filter: brightness(1.15);
-  transform: translateY(-1px);
-}
+.below button:hover { filter: brightness(1.15); }
 
 .hint {
   font: 12px Arial, sans-serif;
   color: #b8cce3;
 }
 
-@media (min-width: 700px) {
-  .num {
-    font-size: clamp(25px, 3.1vw, 37px);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .snowflake {
-    animation-duration: 0.01ms !important;
-  }
+  .snowflake { animation-duration: .01ms !important; }
 }
 </style>
 </head>
@@ -214,30 +188,25 @@ body {
 
 <div class="stage" id="stage">
 
-  <!-- Your Christmas Wonderland artwork -->
   <img
     class="art"
     src="christmas-wonderland.png"
-    alt="Magical Christmas village with snow, glowing cottages, a decorated tree and Santa's sleigh"
+    alt="A magical snowy Christmas village, glowing Christmas tree and Santa's sleigh"
   >
 
-  <!-- Live Christmas countdown -->
   <div class="live-countdown" aria-label="Countdown to Christmas">
     <div class="time">
       <span class="num" id="days">000</span>
       <span class="unit">DAYS</span>
     </div>
-
     <div class="time">
       <span class="num" id="hours">00</span>
       <span class="unit">HOURS</span>
     </div>
-
     <div class="time">
       <span class="num" id="minutes">00</span>
       <span class="unit">MINUTES</span>
     </div>
-
     <div class="time">
       <span class="num" id="seconds">00</span>
       <span class="unit">SECONDS</span>
@@ -248,131 +217,107 @@ body {
     🎄 Believe in the magic of Christmas! 🎄
   </div>
 
-  <!-- Invisible clickable areas over the artwork buttons -->
-  <button
-    class="magic-button snow-button"
-    onclick="makeSnow(100)"
-    aria-label="Let it snow"
-    title="Let it snow!"
-  ></button>
+  <button class="art-button snow-button"
+    onclick="makeSnow(100)" aria-label="Let it snow">Snow</button>
 
-  <button
-    class="magic-button surprise-button"
-    onclick="showSurprise()"
-    aria-label="Christmas surprise"
-    title="Christmas surprise"
-  ></button>
+  <button class="art-button surprise-button"
+    onclick="showSurprise()" aria-label="Christmas surprise">Surprise</button>
 
-  <button
-    class="magic-button wish-button"
-    onclick="makeWish()"
-    aria-label="Make a Christmas wish"
-    title="Make a wish"
-  ></button>
+  <button class="art-button wish-button"
+    onclick="makeWish()" aria-label="Make a Christmas wish">Wish</button>
 
-  <div class="result surprise-result" id="surprise" aria-live="polite"></div>
-  <div class="result wish-result" id="wish" aria-live="polite"></div>
-
+  <div class="result" id="surprise" aria-live="polite"></div>
+  <div class="result" id="wish" aria-live="polite"></div>
 </div>
 
 <section class="below">
   <p>❄️ Your own little corner of Christmas magic. ❄️</p>
-  <p class="hint">
-    Make it snow, discover a Christmas surprise, or make a wish!
-  </p>
-
+  <p class="hint">Make it snow, discover a surprise, or make a wish!</p>
   <button onclick="makeSnow(100)">❄️ Let it snow!</button>
   <button onclick="showSurprise()">🎁 Christmas surprise</button>
   <button onclick="makeWish()">🌟 Make a wish</button>
 </section>
 
 <script>
-const $ = id => document.getElementById(id);
-
 /*
-  CHRISTMAS STARTS AT MIDNIGHT:
-  00:00:00 on 25 December in your local time zone.
+  The countdown ends at midnight at the START of 25 December.
+  The computer's local time zone is used.
 */
+
 function nextChristmas() {
   const now = new Date();
-  let year = now.getFullYear();
+  const year = now.getFullYear();
 
-  // Month 11 means December.
-  // Hour 0 means midnight, NOT 1 AM.
-  let christmas = new Date(year, 11, 25, 0, 0, 0, 0);
+  let target = new Date(year, 11, 25, 0, 0, 0, 0);
 
-  // If this year's Christmas midnight has passed,
-  // count down to Christmas next year instead.
-  if (now >= christmas) {
-    christmas = new Date(year + 1, 11, 25, 0, 0, 0, 0);
+  // If this year's Christmas midnight has passed, use next year.
+  if (now.getTime() >= target.getTime()) {
+    target = new Date(year + 1, 11, 25, 0, 0, 0, 0);
   }
 
-  return christmas;
+  return target;
 }
 
 function updateCountdown() {
-  const now = Date.now();
-  const target = nextChristmas().getTime();
-  const difference = Math.max(0, target - now);
+  const now = new Date();
+  const target = nextChristmas();
+  const difference = Math.max(0, target.getTime() - now.getTime());
 
   const days = Math.floor(difference / 86400000);
   const hours = Math.floor((difference % 86400000) / 3600000);
   const minutes = Math.floor((difference % 3600000) / 60000);
   const seconds = Math.floor((difference % 60000) / 1000);
 
-  $("days").textContent = String(days).padStart(3, "0");
-  $("hours").textContent = String(hours).padStart(2, "0");
-  $("minutes").textContent = String(minutes).padStart(2, "0");
-  $("seconds").textContent = String(seconds).padStart(2, "0");
+  document.getElementById("days").textContent =
+    String(days).padStart(3, "0");
 
-  if (difference === 0) {
-    $("message").textContent = "🎄 MERRY CHRISTMAS! 🎅";
-  } else if (days <= 7) {
-    $("message").textContent = "🎅 IT'S ALMOST CHRISTMAS! 🎁";
-  } else {
-    $("message").textContent = "🎄 Believe in the magic of Christmas! 🎄";
-  }
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
+
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
+
+  document.getElementById("message").textContent =
+    difference === 0
+      ? "🎄 MERRY CHRISTMAS! 🎅"
+      : days <= 7
+        ? "🎅 IT'S ALMOST CHRISTMAS! 🎁"
+        : "🎄 Believe in the magic of Christmas! 🎄";
 }
 
-// Update immediately, then refresh every second.
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// Snowfall
-let snowOn = true;
-
+// Falling snow
 function makeSnow(amount) {
   for (let i = 0; i < amount; i++) {
     setTimeout(() => {
       const flake = document.createElement("span");
-
       flake.className = "snowflake";
       flake.textContent = ["❄", "❅", "✧", "•"][
         Math.floor(Math.random() * 4)
       ];
 
       const duration = 5 + Math.random() * 7;
-
       flake.style.left = Math.random() * 100 + "vw";
       flake.style.fontSize = 10 + Math.random() * 19 + "px";
-      flake.style.opacity = 0.4 + Math.random() * 0.6;
+      flake.style.opacity = .4 + Math.random() * .6;
       flake.style.animationDuration = duration + "s";
       flake.style.setProperty(
-        "--drift",
-        (Math.random() * 150 - 75) + "px"
+        "--drift", (Math.random() * 150 - 75) + "px"
       );
 
       document.body.appendChild(flake);
-
       setTimeout(() => flake.remove(), duration * 1000);
     }, i * 25);
   }
 }
 
 setInterval(() => {
-  if (!document.hidden && snowOn) {
-    makeSnow(2);
-  }
+  if (!document.hidden) makeSnow(2);
 }, 1500);
 
 makeSnow(28);
@@ -380,44 +325,34 @@ makeSnow(28);
 // Christmas surprises
 function showSurprise() {
   const messages = [
-    "🎄 Your mission: spread kindness, enjoy something delicious, and make a beautiful memory!",
-    "🎅 North Pole news: you have been promoted to Chief Christmas Cheer Officer!",
-    "🎁 May your home be full of laughter, love and wonderful surprises.",
-    "✨ The reindeer have voted: you deserve extra Christmas pudding!",
-    "☕ North Pole instructions: get cosy, enjoy a warm drink, and embrace the magic."
+    "🎄 Spread kindness, enjoy something delicious, and make a memory!",
+    "🎅 You are promoted to Chief Christmas Cheer Officer!",
+    "🎁 May your home be full of laughter, love and surprises.",
+    "✨ The reindeer say you deserve extra Christmas pudding!",
+    "☕ Get cosy, enjoy a warm drink, and embrace the magic."
   ];
 
-  const box = $("surprise");
-
-  box.textContent =
-    messages[Math.floor(Math.random() * messages.length)];
-
+  const box = document.getElementById("surprise");
+  box.textContent = messages[Math.floor(Math.random() * messages.length)];
   box.style.display = "block";
 }
 
-// Christmas wishes
 function makeWish() {
   const wishes = [
     "❤️ May your Christmas be filled with happiness and laughter.",
     "✨ May something wonderful surprise you this Christmas.",
     "☕ May your home be warm and your cocoa extra chocolatey.",
-    "🌟 May the new year bring exciting adventures and beautiful memories.",
-    "🎄 May kindness, peace and Christmas magic follow you everywhere."
+    "🌟 May the new year bring exciting adventures and memories.",
+    "🎄 May kindness, peace and Christmas magic follow you."
   ];
 
-  const box = $("wish");
-
-  box.textContent =
-    wishes[Math.floor(Math.random() * wishes.length)];
-
+  const box = document.getElementById("wish");
+  box.textContent = wishes[Math.floor(Math.random() * wishes.length)];
   box.style.display = "block";
 }
 
 document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) {
-    makeSnow(12);
-    updateCountdown();
-  }
+  if (!document.hidden) updateCountdown();
 });
 </script>
 
