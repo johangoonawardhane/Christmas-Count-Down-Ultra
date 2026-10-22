@@ -5,300 +5,158 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Christmas Countdown Ultra 🎄</title>
 <style>
-:root {
-  --gold: #f5d58a;
-  --cream: #fff8e8;
-  --green: #073b2a;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #071b16;
-  color: var(--cream);
-  font-family: Georgia, "Times New Roman", serif;
-  text-align: center;
-}
-header { padding: 22px 12px 12px; }
-h1 {
-  color: var(--gold);
-  font-size: clamp(2rem, 6vw, 4rem);
-  margin: 8px 0;
-  text-shadow: 0 0 22px #e7b75b55;
-}
-.subtitle { font-family: Arial, sans-serif; color: #e9e1ce; }
-.scene {
-  position: relative;
-  width: min(94vw, 900px);
-  margin: 20px auto;
-  border: 2px solid var(--gold);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 0 35px #0009;
-  background: #12382b;
-}
-.scene img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.countdown {
-  position: absolute;
-  top: 6%;
-  left: 5%;
-  right: 5%;
-  padding: 12px;
-  border: 1px solid #f5d58a99;
-  border-radius: 12px;
-  background: #071b16d9;
-  backdrop-filter: blur(5px);
-}
-.countdown h2 {
-  margin: 0 0 10px;
-  color: var(--gold);
-  font-size: clamp(1rem, 3vw, 1.8rem);
-}
-.numbers {
-  display: flex;
-  justify-content: center;
-  gap: clamp(5px, 2vw, 18px);
-}
-.unit { min-width: 0; }
-.number {
-  display: block;
-  color: white;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  font-size: clamp(1.3rem, 5vw, 3rem);
-}
-.unit small {
-  display: block;
-  color: var(--gold);
-  font: 0.72rem Arial, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.message {
-  color: var(--gold);
-  margin: 9px 0 0;
-  font-size: clamp(.8rem, 2vw, 1.1rem);
-}
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  padding: 18px 12px 28px;
-}
-button {
-  border: 1px solid var(--gold);
-  border-radius: 30px;
-  padding: 13px 20px;
-  background: var(--gold);
-  color: #10271e;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-}
-button:hover { transform: translateY(-2px); }
-#surprise {
-  min-height: 30px;
-  padding: 0 15px 24px;
-  color: var(--gold);
-  font-size: 1.2rem;
-}
-footer {
-  padding: 20px;
-  color: #c8d2c9;
-  font: .8rem Arial, sans-serif;
-}
-.snow {
-  position: fixed;
-  top: -20px;
-  z-index: 5;
-  color: white;
-  pointer-events: none;
-  animation: fall linear forwards;
-}
-@keyframes fall {
-  to { transform: translateY(110vh) rotate(360deg); opacity: .2; }
-}
-@media (max-width: 480px) {
-  .countdown { top: 3%; padding: 7px; }
-  .countdown h2 { margin-bottom: 4px; }
-  .message { margin-top: 4px; }
+*{box-sizing:border-box}
+:root{--gold:#f5d58a;--cream:#fff8e8}
+body{margin:0;min-height:100vh;background:#071b16;color:var(--cream);font-family:Georgia,"Times New Roman",serif;text-align:center}
+header{padding:16px 12px 4px}
+h1{color:var(--gold);font-size:clamp(2rem,5vw,3.6rem);margin:8px 0;text-shadow:0 2px 18px #000}
+.subtitle{font-family:Arial,sans-serif;color:#fff8e8;margin:8px}
+.scene{position:relative;width:min(96vw,1100px);margin:14px auto 0;border:2px solid var(--gold);border-radius:14px;overflow:hidden;box-shadow:0 0 35px #0009;background:#12382b}
+.scene img{display:block;width:100%;height:auto}
+.countdown{position:absolute;top:26%;left:5%;right:5%;padding:12px;border:1px solid #f5d58a99;border-radius:12px;background:rgba(4,24,20,.97);z-index:2;text-align:center;box-shadow:0 5px 25px #0008}
+.countdown h2{margin:0 0 8px;color:var(--gold);font-size:clamp(1rem,3vw,1.8rem)}
+.numbers{display:flex;justify-content:center;gap:clamp(5px,2vw,18px)}
+.unit{min-width:0}
+.number{display:block;color:white;font-family:Arial,sans-serif;font-weight:bold;font-size:clamp(1.3rem,5vw,3rem);font-variant-numeric:tabular-nums}
+.unit small{display:block;color:var(--gold);font:clamp(.55rem,1.5vw,.85rem) Arial,sans-serif;text-transform:uppercase;letter-spacing:1px}
+.message{color:var(--gold);margin:8px 0 0;font-size:clamp(.8rem,2vw,1.1rem)}
+.controls{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:18px 12px}
+button{border:1px solid var(--gold);border-radius:30px;padding:13px 20px;background:var(--gold);color:#10271e;font-weight:bold;font-size:1rem;cursor:pointer}
+button:hover{transform:translateY(-2px)}
+#surprise{min-height:35px;padding:0 15px 18px;color:var(--gold);font-size:1.1rem}
+footer{padding:20px;color:#c8d2c9;font: .8rem Arial,sans-serif}
+.snow{position:fixed;top:-20px;z-index:5;color:white;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2}}
+@media(max-width:480px){
+ header{padding-top:8px}
+ .scene{width:100%;border-radius:0}
+ .countdown{top:25%;left:3%;right:3%;padding:7px}
+ .countdown h2{margin-bottom:4px}
+ .message{margin-top:4px}
+ .numbers{gap:8px}
 }
 </style>
 </head>
 <body>
 <header>
-  <h1>🎄 Christmas Countdown 🎄</h1>
-  <p class="subtitle">The magic is getting closer...</p>
+<h1>🎄 Christmas Countdown 🎄</h1>
+<p class="subtitle">The most wonderful time of the year!</p>
 </header>
 
 <main>
-  <div class="scene">
-    <img src="christmas-wonderland.png"
-         alt="Christmas Wonderland with a festive Christmas scene">
+<div class="scene">
+<img src="christmas-wonderland.png" alt="A magical, snowy Christmas village">
+<section class="countdown" aria-label="Live countdown to Christmas">
+<h2>UNTIL CHRISTMAS DAY</h2>
+<div class="numbers">
+<div class="unit"><span class="number" id="days">000</span><small>Days</small></div>
+<div class="unit"><span class="number" id="hours">00</span><small>Hours</small></div>
+<div class="unit"><span class="number" id="minutes">00</span><small>Minutes</small></div>
+<div class="unit"><span class="number" id="seconds">00</span><small>Seconds</small></div>
+</div>
+<p class="message" id="message">✨ Believe in the magic of Christmas ✨</p>
+</section>
+</div>
 
-    <section class="countdown" aria-label="Countdown to Christmas">
-      <h2>UNTIL CHRISTMAS DAY</h2>
-      <div class="numbers">
-        <div class="unit">
-          <span class="number" id="days">000</span>
-          <small>Days</small>
-        </div>
-        <div class="unit">
-          <span class="number" id="hours">00</span>
-          <small>Hours</small>
-        </div>
-        <div class="unit">
-          <span class="number" id="minutes">00</span>
-          <small>Minutes</small>
-        </div>
-        <div class="unit">
-          <span class="number" id="seconds">00</span>
-          <small>Seconds</small>
-        </div>
-      </div>
-      <p class="message" id="message">✨ Christmas magic awaits ✨</p>
-    </section>
-  </div>
-
-  <div class="controls">
-    <button id="surpriseButton">🎁 Christmas Surprise</button>
-    <button id="wishButton">✨ Christmas Wish</button>
-  </div>
-  <div id="surprise" aria-live="polite"></div>
+<div class="controls">
+<button id="surpriseButton">🎁 Christmas Surprise</button>
+<button id="wishButton">✨ Christmas Wish</button>
+</div>
+<div id="surprise" aria-live="polite"></div>
 </main>
-
 <footer>Made with Christmas magic ❤️</footer>
 
 <script>
 "use strict";
 
-/*
-  Calculate the next Christmas midnight in Europe/London.
-  UK midnight is 00:00 on December 25, regardless of the
-  computer's configured timezone.
-*/
-
-function londonParts(date) {
-  const parts = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/London",
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    hourCycle: "h23"
+function londonParts(date){
+  const parts=new Intl.DateTimeFormat("en-GB",{
+    timeZone:"Europe/London",
+    year:"numeric",month:"numeric",day:"numeric",
+    hour:"numeric",minute:"numeric",second:"numeric",
+    hourCycle:"h23"
   }).formatToParts(date);
-
-  const result = {};
-  for (const part of parts) {
-    if (part.type !== "literal") {
-      result[part.type] = Number(part.value);
-    }
+  const result={};
+  for(const part of parts){
+    if(part.type!=="literal") result[part.type]=Number(part.value);
   }
   return result;
 }
 
-function londonMidnightToTimestamp(year, month, day) {
-  // Begin with the desired date interpreted as UTC.
-  const desired = Date.UTC(year, month - 1, day, 0, 0, 0);
-  let guess = desired;
-
-  // Compare the desired wall-clock time with London's wall-clock
-  // representation to determine the correct UTC instant.
-  for (let i = 0; i < 4; i++) {
-    const p = londonParts(new Date(guess));
-    const representedAsUTC = Date.UTC(
-      p.year, p.month - 1, p.day, p.hour, p.minute, p.second
-    );
-    const correction = desired - representedAsUTC;
-    guess += correction;
-    if (correction === 0) break;
+function londonMidnight(year,month,day){
+  const desired=Date.UTC(year,month-1,day,0,0,0);
+  let guess=desired;
+  for(let i=0;i<4;i++){
+    const p=londonParts(new Date(guess));
+    const shown=Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second);
+    const correction=desired-shown;
+    guess+=correction;
+    if(correction===0)break;
   }
   return guess;
 }
 
-function nextChristmasTimestamp() {
-  const now = Date.now();
-  const p = londonParts(new Date(now));
-  let year = p.year;
-  let target = londonMidnightToTimestamp(year, 12, 25);
-
-  if (now >= target) {
-    year += 1;
-    target = londonMidnightToTimestamp(year, 12, 25);
-  }
+function nextChristmas(){
+  const now=Date.now();
+  let year=londonParts(new Date(now)).year;
+  let target=londonMidnight(year,12,25);
+  if(now>=target)target=londonMidnight(year+1,12,25);
   return target;
 }
 
-function updateCountdown() {
-  const difference = Math.max(0, nextChristmasTimestamp() - Date.now());
+function updateCountdown(){
+  const difference=Math.max(0,nextChristmas()-Date.now());
+  const days=Math.floor(difference/86400000);
+  const hours=Math.floor((difference%86400000)/3600000);
+  const minutes=Math.floor((difference%3600000)/60000);
+  const seconds=Math.floor((difference%60000)/1000);
 
-  const days = Math.floor(difference / 86400000);
-  const hours = Math.floor((difference % 86400000) / 3600000);
-  const minutes = Math.floor((difference % 3600000) / 60000);
-  const seconds = Math.floor((difference % 60000) / 1000);
+  document.getElementById("days").textContent=String(days).padStart(3,"0");
+  document.getElementById("hours").textContent=String(hours).padStart(2,"0");
+  document.getElementById("minutes").textContent=String(minutes).padStart(2,"0");
+  document.getElementById("seconds").textContent=String(seconds).padStart(2,"0");
 
-  document.getElementById("days").textContent =
-    String(days).padStart(3, "0");
-  document.getElementById("hours").textContent =
-    String(hours).padStart(2, "0");
-  document.getElementById("minutes").textContent =
-    String(minutes).padStart(2, "0");
-  document.getElementById("seconds").textContent =
-    String(seconds).padStart(2, "0");
-
-  document.getElementById("message").textContent =
-    difference === 0
-      ? "🎄 MERRY CHRISTMAS! 🎅"
-      : days <= 7
-        ? "🎅 IT'S ALMOST CHRISTMAS! 🎁"
-        : "✨ Believe in the magic of Christmas ✨";
+  document.getElementById("message").textContent=difference===0
+    ?"🎄 MERRY CHRISTMAS! 🎅"
+    :days<=7?"🎅 IT'S ALMOST CHRISTMAS! 🎁"
+    :"✨ Believe in the magic of Christmas ✨";
 }
 
-document.getElementById("surpriseButton").addEventListener("click", () => {
-  const surprises = [
-    "🎁 Surprise! You deserve a little Christmas magic today.",
-    "🎅 Santa's workshop is getting ready!",
-    "❄️ May your days be merry, bright and full of wonder!",
-    "🎄 The best Christmas moments are made together.",
-    "✨ A little kindness is the loveliest Christmas gift."
-  ];
-  document.getElementById("surprise").textContent =
-    surprises[Math.floor(Math.random() * surprises.length)];
+const surprises=[
+"🎁 Santa's workshop is getting ready!",
+"❄️ May your days be merry and bright!",
+"🎄 The best Christmas moments are made together.",
+"✨ A little kindness is a wonderful Christmas gift."
+];
+const wishes=[
+"❤️ May your home be filled with warmth and laughter.",
+"✨ May a little Christmas magic find its way to you.",
+"🎄 Wishing you joy, peace and wonderful memories.",
+"🌟 May your Christmas wishes come true."
+];
+
+document.getElementById("surpriseButton").addEventListener("click",()=>{
+  document.getElementById("surprise").textContent=surprises[Math.floor(Math.random()*surprises.length)];
+});
+document.getElementById("wishButton").addEventListener("click",()=>{
+  document.getElementById("surprise").textContent=wishes[Math.floor(Math.random()*wishes.length)];
 });
 
-document.getElementById("wishButton").addEventListener("click", () => {
-  const wishes = [
-    "May your home be filled with warmth and laughter. ❤️",
-    "May a little Christmas magic find its way to you. ✨",
-    "Wishing you joy, peace and wonderful memories. 🎄",
-    "May your biggest Christmas wish come true. 🌟"
-  ];
-  document.getElementById("surprise").textContent =
-    wishes[Math.floor(Math.random() * wishes.length)];
-});
-
-function makeSnowflake() {
-  const flake = document.createElement("span");
-  flake.className = "snow";
-  flake.textContent = "❄";
-  flake.style.left = Math.random() * 100 + "vw";
-  flake.style.fontSize = (10 + Math.random() * 15) + "px";
-  const duration = 5 + Math.random() * 7;
-  flake.style.animationDuration = duration + "s";
+function makeSnowflake(){
+  const flake=document.createElement("span");
+  flake.className="snow";
+  flake.textContent="❄";
+  flake.style.left=Math.random()*100+"vw";
+  flake.style.fontSize=(10+Math.random()*15)+"px";
+  const duration=5+Math.random()*7;
+  flake.style.animationDuration=duration+"s";
   document.body.appendChild(flake);
-  setTimeout(() => flake.remove(), duration * 1000);
+  setTimeout(()=>flake.remove(),duration*1000);
 }
 
 updateCountdown();
-setInterval(updateCountdown, 1000);
-setInterval(makeSnowflake, 350);
+setInterval(updateCountdown,1000);
+setInterval(makeSnowflake,350);
 </script>
 </body>
 </html>
