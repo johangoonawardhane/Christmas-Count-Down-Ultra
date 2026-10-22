@@ -20,11 +20,11 @@ h2{font-size:clamp(1.5rem,4vw,3rem);color:var(--gold);margin:0 0 14px;text-shado
 .num{display:block;font-family:Arial,sans-serif;font-size:clamp(2.3rem,7vw,5rem);font-weight:800;line-height:1.05;color:#fff;text-shadow:0 3px 12px #001,0 0 20px #173a70;font-variant-numeric:tabular-nums}
 .label{display:block;margin-top:8px;color:var(--gold);font:700 clamp(.62rem,1.5vw,.95rem) Arial,sans-serif;letter-spacing:.12em;text-shadow:0 2px 6px #001}
 .magic{font-size:clamp(1rem,2.5vw,1.8rem);color:var(--gold);margin:22px 0;text-shadow:0 2px 8px #001}
-.buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin:clamp(24px,5vh,48px) auto 16px;width:100%}
+.buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin:24px auto 12px;width:100%}
 button{font:600 clamp(.95rem,2vw,1.25rem) Georgia,serif;color:#fff2bf;background:rgba(2,23,51,.3);border:2px solid var(--gold);border-radius:50px;padding:14px 24px;cursor:pointer;text-shadow:0 2px 6px #001;box-shadow:0 2px 12px #0015}
 button:hover{background:rgba(255,215,120,.17);transform:translateY(-2px)}
-#response{min-height:30px;font-size:1.1rem;color:var(--gold);text-shadow:0 2px 8px #001}
-footer{font-size:.95rem;text-shadow:0 2px 8px #001;margin-top:15px}
+#response{min-height:0;font-size:1.1rem;color:var(--gold);text-shadow:0 2px 8px #001}
+footer{font-size:.95rem;text-shadow:0 2px 8px #001;margin-top:8px;padding-bottom:8px}
 .snow{position:fixed;top:-20px;z-index:5;color:white;pointer-events:none;animation:fall linear forwards;text-shadow:0 0 5px white}
 @keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2}}
 @media(max-width:520px){
@@ -100,7 +100,7 @@ function nextChristmas(){
 }
 
 function updateCountdown(){
-  const ms=Math.max(0,nextChristmas()-Date.now()-3600000);
+  const ms=Math.max(0,nextChristmas()-Date.now());
   const d=Math.floor(ms/86400000);
   const h=Math.floor((ms%86400000)/3600000);
   const m=Math.floor((ms%3600000)/60000);
