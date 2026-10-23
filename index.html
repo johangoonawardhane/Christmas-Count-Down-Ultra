@@ -4,295 +4,182 @@ cat > index.html <<'EOF'
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#07162b">
 <title>Christmas Countdown Ultra 🎄</title>
 <style>
-:root {
-  --gold: #ffda83;
-  --cream: #fff8e8;
-  --night: #07162b;
-}
 * { box-sizing: border-box; }
-html { min-height: 100%; }
+:root { --gold: #ffda83; }
 body {
-  margin: 0;
-  min-height: 100vh;
-  color: var(--cream);
+  margin: 0; min-height: 100vh; color: white;
   font-family: Georgia, "Times New Roman", serif;
-  background:
-    radial-gradient(ellipse at 50% 34%, #244e83 0%, #122c51 36%, transparent 68%),
-    linear-gradient(180deg, #071328 0%, #102b50 55%, #07162b 100%);
-  overflow-x: hidden;
+  background: #07162b;
 }
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: .65;
-  background-image:
-    radial-gradient(2px 2px at 10% 15%, white 50%, transparent 60%),
-    radial-gradient(2px 2px at 25% 38%, white 50%, transparent 60%),
-    radial-gradient(3px 3px at 76% 19%, #ffe9b0 50%, transparent 60%),
-    radial-gradient(2px 2px at 90% 44%, white 50%, transparent 60%),
-    radial-gradient(2px 2px at 61% 10%, white 50%, transparent 60%),
-    radial-gradient(2px 2px at 42% 28%, white 50%, transparent 60%),
-    radial-gradient(3px 3px at 17% 55%, #ffe9b0 50%, transparent 60%);
-  z-index: 0;
+.scene {
+  position: fixed; inset: 0; z-index: -2;
+  background-image: url("christmas-wonderland.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #07162b;
 }
-.page {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 48px 20px 32px;
-  text-align: center;
+.scene::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, #06132855, #06132866 65%, #061328bb);
+}
+.snow {
+  position: fixed; inset: 0; overflow: hidden;
+  pointer-events: none; z-index: 2;
+}
+.flake {
+  position: absolute; top: -20px; left: var(--x);
+  color: white; opacity: .8;
+  animation: fall var(--duration) linear var(--delay) infinite;
+}
+@keyframes fall {
+  to { transform: translate(var(--drift), 110vh) rotate(360deg); }
+}
+main {
+  width: min(100%, 1100px); min-height: 100vh;
+  margin: auto; padding: 48px 20px 60px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; position: relative;
 }
 .eyebrow {
-  color: var(--gold);
-  font: bold .82rem/1.7 Arial, sans-serif;
-  letter-spacing: .27em;
-  text-transform: uppercase;
-  margin: 0 0 18px;
+  margin: 0 0 18px; color: var(--gold);
+  font: bold .8rem/1.6 Arial, sans-serif;
+  letter-spacing: .2em; text-transform: uppercase;
 }
 h1 {
-  font-size: clamp(2.7rem, 8vw, 6.2rem);
-  line-height: .98;
-  letter-spacing: .025em;
-  color: var(--gold);
-  text-shadow: 0 4px 28px #0009, 0 0 35px #ffca6955;
-  margin: 0;
+  margin: 0; color: var(--gold);
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  line-height: .98; text-shadow: 0 4px 18px #000b;
 }
 .subtitle {
-  font-size: clamp(1.05rem, 2.8vw, 1.65rem);
-  line-height: 1.5;
-  margin: 22px 0 8px;
-  color: #fff6e8;
+  font-size: clamp(1rem, 3vw, 1.6rem);
+  margin: 22px 0 12px; text-shadow: 0 2px 8px #000;
 }
 .status {
-  font: bold .78rem Arial, sans-serif;
-  letter-spacing: .22em;
-  color: #ffdb87;
-  margin: 8px 0 30px;
+  color: var(--gold); font: bold .8rem Arial, sans-serif;
+  letter-spacing: .18em; margin: 4px 0 34px;
 }
-.section-title {
-  color: var(--gold);
-  font-size: clamp(1.35rem, 4vw, 2.3rem);
-  line-height: 1.25;
-  margin: 0 0 22px;
+h2 {
+  color: var(--gold); font-size: clamp(1.4rem, 4vw, 2.5rem);
+  margin: 0 0 22px; text-shadow: 0 3px 12px #000b;
 }
 .countdown {
   width: min(850px, 100%);
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(7px, 2vw, 18px);
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(6px, 2vw, 18px);
 }
 .unit {
-  min-width: 0;
-  padding: clamp(14px, 3vw, 26px) 5px 18px;
-  border: 1px solid #f7d68b99;
-  border-radius: 17px;
-  background: linear-gradient(155deg, #183d5ddd, #07192ceF);
-  box-shadow: 0 9px 28px #0005, inset 0 0 22px #f5d58b0d;
+  min-width: 0; padding: clamp(14px, 3vw, 25px) 3px;
+  border: 1px solid #ffda83cc; border-radius: 18px;
+  background: #071b30d9;
+  box-shadow: 0 6px 24px #0006;
 }
 .number {
-  display: block;
-  color: #fff;
-  font: 800 clamp(2rem, 7.5vw, 5.1rem)/1 Arial, sans-serif;
-  letter-spacing: -.045em;
+  display: block; color: white;
+  font: 800 clamp(1.8rem, 7.5vw, 5rem)/1 Arial, sans-serif;
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 4px 15px #0009;
+  letter-spacing: -.04em;
 }
 .label {
-  display: block;
-  margin-top: 12px;
-  color: var(--gold);
-  font: bold clamp(.62rem, 1.8vw, .9rem) Arial, sans-serif;
-  letter-spacing: .12em;
+  display: block; margin-top: 12px; color: var(--gold);
+  font: bold clamp(.58rem, 1.7vw, .85rem) Arial, sans-serif;
+  letter-spacing: .08em;
 }
 .magic {
-  color: var(--gold);
-  font-size: clamp(1.15rem, 3vw, 1.75rem);
-  font-style: italic;
-  margin: 28px 0 0;
+  margin: 28px 0 0; color: var(--gold);
+  font-size: clamp(1rem, 3vw, 1.7rem);
+  text-shadow: 0 2px 10px #000;
 }
 .note {
-  color: #d6e2f4;
-  font: .8rem/1.6 Arial, sans-serif;
-  margin: 14px 0 0;
+  margin: 14px 0 0; font: .78rem Arial, sans-serif;
+  color: #fff; text-shadow: 0 2px 8px #000;
 }
-.scene {
-  position: fixed;
-  z-index: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 155px;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: .95;
+@media(max-width: 480px) {
+  main { padding: 55px 12px 45px; }
+  .eyebrow { font-size: .66rem; letter-spacing: .12em; }
+  .status { margin-bottom: 28px; }
+  .unit { border-radius: 12px; padding: 15px 1px; }
+  .label { letter-spacing: 0; }
 }
-.hill {
-  position: absolute;
-  bottom: -95px;
-  width: 75vw;
-  height: 175px;
-  background: linear-gradient(#f8f4e8, #c9d9ed);
-  border-radius: 50% 50% 0 0;
-}
-.hill.left { left: -25vw; }
-.hill.right { right: -25vw; width: 85vw; }
-.tree {
-  position: absolute;
-  bottom: 22px;
-  width: 0;
-  height: 0;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-bottom: 100px solid #123f39;
-  filter: drop-shadow(0 3px 5px #0007);
-}
-.tree::before {
-  content: "";
-  position: absolute;
-  top: 30px;
-  left: -23px;
-  border-left: 23px solid transparent;
-  border-right: 23px solid transparent;
-  border-bottom: 72px solid #1b5b49;
-}
-.tree::after {
-  content: "✦";
-  position: absolute;
-  color: var(--gold);
-  font-size: 17px;
-  top: 18px;
-  left: -7px;
-}
-.t1 { left: 7%; transform: scale(.95); }
-.t2 { left: 17%; transform: scale(.65); bottom: 10px; }
-.t3 { right: 8%; transform: scale(1.05); }
-.t4 { right: 19%; transform: scale(.7); bottom: 9px; }
-.snow {
-  position: fixed;
-  inset: -20px 0 0;
-  z-index: 3;
-  pointer-events: none;
-  overflow: hidden;
-}
-.flake {
-  position: absolute;
-  top: -20px;
-  left: var(--x);
-  color: white;
-  opacity: var(--o);
-  font-size: var(--s);
-  animation: fall var(--d) linear var(--delay) infinite;
-}
-@keyframes fall {
-  to { transform: translate3d(var(--drift), 110vh, 0) rotate(360deg); }
-}
-@media (max-width: 480px) {
-  .page { justify-content: flex-start; padding-top: 65px; }
-  .eyebrow { font-size: .68rem; letter-spacing: .15em; }
-  .countdown { gap: 6px; }
-  .unit { border-radius: 12px; padding: 16px 2px 13px; }
-  .number { font-size: clamp(1.55rem, 8vw, 2.5rem); }
-  .label { letter-spacing: .04em; }
-  .section-title { margin-bottom: 18px; }
-  .scene { height: 100px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .flake { animation: none; display: none; }
+@media(prefers-reduced-motion: reduce) {
+  .flake { display: none; animation: none; }
 }
 </style>
 </head>
 <body>
+<div class="scene" aria-hidden="true"></div>
 <div class="snow" id="snow" aria-hidden="true"></div>
 
-<div class="scene" aria-hidden="true">
-  <div class="hill left"></div>
-  <div class="hill right"></div>
-  <div class="tree t1"></div>
-  <div class="tree t2"></div>
-  <div class="tree t3"></div>
-  <div class="tree t4"></div>
-</div>
-
-<main class="page">
+<main>
   <p class="eyebrow">✦ The most wonderful time of the year ✦</p>
   <h1>CHRISTMAS<br>COUNTDOWN</h1>
   <p class="subtitle">The most wonderful time of the year!</p>
   <p class="status">✦ SANTA IS GETTING READY ✦</p>
-
-  <h2 class="section-title">Until Christmas Day</h2>
+  <h2>Until Christmas Day</h2>
 
   <section class="countdown" aria-label="Time remaining until Christmas">
-    <div class="unit">
-      <span class="number" id="days">000</span>
-      <span class="label">DAYS</span>
-    </div>
-    <div class="unit">
-      <span class="number" id="hours">00</span>
-      <span class="label">HOURS</span>
-    </div>
-    <div class="unit">
-      <span class="number" id="minutes">00</span>
-      <span class="label">MINUTES</span>
-    </div>
-    <div class="unit">
-      <span class="number" id="seconds">00</span>
-      <span class="label">SECONDS</span>
-    </div>
+    <div class="unit"><span class="number" id="days">000</span><span class="label">DAYS</span></div>
+    <div class="unit"><span class="number" id="hours">00</span><span class="label">HOURS</span></div>
+    <div class="unit"><span class="number" id="minutes">00</span><span class="label">MINUTES</span></div>
+    <div class="unit"><span class="number" id="seconds">00</span><span class="label">SECONDS</span></div>
   </section>
 
   <p class="magic">✦ Believe in the magic of Christmas ✦</p>
-  <p class="note">Counting down to midnight on 25 December · UK time</p>
+  <p class="note">Counting down to midnight on Christmas Day · UK time</p>
 </main>
 
 <script>
 "use strict";
 
-// Christmas begins at 00:00 UK time on 25 December.
-// The UK is on GMT on Christmas Day, so UTC midnight is correct.
-function getNextChristmas() {
+// Find midnight on 25 December in the Europe/London timezone.
+function londonParts(date) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/London",
+    year: "numeric", month: "numeric", day: "numeric",
+    hour: "numeric", minute: "numeric", second: "numeric",
+    hourCycle: "h23"
+  }).formatToParts(date);
+  return Object.fromEntries(parts.map(p => [p.type, Number(p.value)]));
+}
+
+function londonMidnightUtc(year, month, day) {
+  // Iteratively convert the desired London wall time into UTC.
+  const desired = Date.UTC(year, month - 1, day, 0, 0, 0);
+  let guess = desired;
+  for (let i = 0; i < 3; i++) {
+    const p = londonParts(new Date(guess));
+    const represented = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second);
+    guess += desired - represented;
+  }
+  return guess;
+}
+
+function nextChristmas() {
   const now = new Date();
-  let year = Number(
-    new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Europe/London",
-      year: "numeric"
-    }).format(now)
-  );
-
-  let target = Date.UTC(year, 11, 25, 0, 0, 0);
-
-  if (now.getTime() >= target) {
-    year += 1;
-    target = Date.UTC(year, 11, 25, 0, 0, 0);
+  const year = londonParts(now).year;
+  let target = londonMidnightUtc(year, 12, 25);
+  if (Date.now() >= target) {
+    target = londonMidnightUtc(year + 1, 12, 25);
   }
   return target;
 }
 
-let targetTime = getNextChristmas();
+let target = nextChristmas();
 
 function updateCountdown() {
   const now = Date.now();
+  if (now >= target) target = nextChristmas();
 
-  // Switch to next year's Christmas immediately after reaching zero.
-  if (now >= targetTime) {
-    targetTime = getNextChristmas();
-  }
-
-  let remaining = Math.max(0, targetTime - now);
-  const days = Math.floor(remaining / 86400000);
-  remaining %= 86400000;
-  const hours = Math.floor(remaining / 3600000);
-  remaining %= 3600000;
-  const minutes = Math.floor(remaining / 60000);
-  const seconds = Math.floor((remaining % 60000) / 1000);
+  let ms = Math.max(0, target - now);
+  const days = Math.floor(ms / 86400000);
+  ms %= 86400000;
+  const hours = Math.floor(ms / 3600000);
+  ms %= 3600000;
+  const minutes = Math.floor(ms / 60000);
+  const seconds = Math.floor((ms % 60000) / 1000);
 
   document.getElementById("days").textContent = String(days).padStart(3, "0");
   document.getElementById("hours").textContent = String(hours).padStart(2, "0");
@@ -303,19 +190,17 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// Generate decorative snowflakes without installing any libraries.
 const snow = document.getElementById("snow");
-for (let i = 0; i < 38; i++) {
-  const flake = document.createElement("span");
-  flake.className = "flake";
-  flake.textContent = i % 4 === 0 ? "❄" : "•";
-  flake.style.setProperty("--x", Math.random() * 100 + "%");
-  flake.style.setProperty("--s", (8 + Math.random() * 13) + "px");
-  flake.style.setProperty("--o", (0.3 + Math.random() * 0.65).toFixed(2));
-  flake.style.setProperty("--d", (8 + Math.random() * 14) + "s");
-  flake.style.setProperty("--delay", (-Math.random() * 20) + "s");
-  flake.style.setProperty("--drift", (-50 + Math.random() * 100) + "px");
-  snow.appendChild(flake);
+for (let i = 0; i < 35; i++) {
+  const f = document.createElement("span");
+  f.className = "flake";
+  f.textContent = i % 4 === 0 ? "❄" : "•";
+  f.style.setProperty("--x", Math.random() * 100 + "%");
+  f.style.setProperty("--duration", 8 + Math.random() * 12 + "s");
+  f.style.setProperty("--delay", -Math.random() * 20 + "s");
+  f.style.setProperty("--drift", -45 + Math.random() * 90 + "px");
+  f.style.fontSize = 8 + Math.random() * 12 + "px";
+  snow.appendChild(f);
 }
 </script>
 </body>
