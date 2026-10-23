@@ -134,35 +134,26 @@ h2 {
 <script>
 "use strict";
 
-// Find midnight on 25 December in the Europe/London timezone.
+// Countdown to midnight at the start of Christmas Day in UK time.
 function londonParts(date) {
   const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone: "Europe/London",
-    year: "numeric", month: "numeric", day: "numeric",
-    hour: "numeric", minute: "numeric", second: "numeric",
-    hourCycle: "h23"
+    year: "numeric",
+    month: "numeric",
+    day: "numeric"
   }).formatToParts(date);
   return Object.fromEntries(parts.map(p => [p.type, Number(p.value)]));
-}
-
-function londonMidnightUtc(year, month, day) {
-  // Iteratively convert the desired London wall time into UTC.
-  const desired = Date.UTC(year, month - 1, day, 0, 0, 0);
-  let guess = desired;
-  for (let i = 0; i < 3; i++) {
-    const p = londonParts(new Date(guess));
-    const represented = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second);
-    guess += desired - represented;
-  }
-  return guess;
 }
 
 function nextChristmas() {
   const now = new Date();
   const year = londonParts(now).year;
-  let target = londonMidnightUtc(year, 12, 25);
+
+  // Christmas Day is in winter, when London uses GMT (UTC+0).
+  let target = Date.UTC(year, 11, 25, 0, 0, 0);
+
   if (Date.now() >= target) {
-    target = londonMidnightUtc(year + 1, 12, 25);
+    target = Date.UTC(year + 1, 11, 25, 0, 0, 0);
   }
   return target;
 }
