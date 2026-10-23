@@ -165,7 +165,7 @@ function updateCountdown() {
   const now = Date.now();
   if (now >= target) target = nextChristmas();
 
-  let ms = Math.max(0, target - now);
+  let ms = Math.max(0, target - now - 3600000);
   const days = Math.floor(ms / 86400000);
   ms %= 86400000;
   const hours = Math.floor(ms / 3600000);
