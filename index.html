@@ -147,13 +147,14 @@ function londonParts(date) {
 
 function nextChristmas() {
   const now = new Date();
-  const year = londonParts(now).year;
+  const year = Number(new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/London",
+    year: "numeric"
+  }).format(now));
 
-  // Christmas Day is in winter, when London uses GMT (UTC+0).
-  let target = Date.UTC(year, 11, 25, 0, 0, 0);
-
-  if (Date.now() >= target) {
-    target = Date.UTC(year + 1, 11, 25, 0, 0, 0);
+  let target = Date.parse(`${year}-12-25T00:00:00Z`);
+  if (now.getTime() >= target) {
+    target = Date.parse(`${year + 1}-12-25T00:00:00Z`);
   }
   return target;
 }
