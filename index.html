@@ -1,149 +1,323 @@
+cat > index.html <<'EOF'
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07162b">
 <title>Christmas Countdown Ultra 🎄</title>
 <style>
-:root{--gold:#ffd778;--white:#fffaf0}
-*{box-sizing:border-box}
-body{margin:0;background:#06162f;color:var(--white);font-family:Georgia,'Times New Roman',serif;text-align:center}
-.hero{position:relative;min-height:100vh;overflow:hidden;isolation:isolate;padding:clamp(18px,4vh,38px) 14px 24px;display:flex;flex-direction:column;align-items:center}
-.scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2}
-.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,15,40,.22),rgba(0,20,50,.05) 55%,rgba(0,15,40,.32));pointer-events:none}
-.kicker{font-size:clamp(.65rem,1.6vw,1rem);font-weight:bold;letter-spacing:.22em;color:var(--gold);margin:12px 0 18px;text-shadow:0 2px 8px #001}
-h1{font-size:clamp(1.8rem,5.5vw,4rem);line-height:1.12;color:var(--gold);margin:0 auto 10px;text-shadow:0 3px 8px #001;max-width:950px;width:100%;overflow-wrap:break-word}
-.subtitle{font-size:clamp(1rem,2.5vw,1.6rem);margin:10px 0 36px;text-shadow:0 2px 8px #001}
-h2{font-size:clamp(1.5rem,4vw,3rem);color:var(--gold);margin:0 0 14px;text-shadow:0 2px 8px #001}
-.timer{display:flex;justify-content:center;align-items:flex-start;gap:clamp(10px,3vw,38px);margin:0 auto;max-width:800px}
-.unit{min-width:0}
-.num{display:block;font-family:Arial,sans-serif;font-size:clamp(2.3rem,7vw,5rem);font-weight:800;line-height:1.05;color:#fff;text-shadow:0 3px 12px #001,0 0 20px #173a70;font-variant-numeric:tabular-nums}
-.label{display:block;margin-top:8px;color:var(--gold);font:700 clamp(.62rem,1.5vw,.95rem) Arial,sans-serif;letter-spacing:.12em;text-shadow:0 2px 6px #001}
-.magic{font-size:clamp(1rem,2.5vw,1.8rem);color:var(--gold);margin:22px 0;text-shadow:0 2px 8px #001}
-.buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin:24px auto 12px;width:100%}
-button{font:600 clamp(.95rem,2vw,1.25rem) Georgia,serif;color:#fff2bf;background:rgba(2,23,51,.3);border:2px solid var(--gold);border-radius:50px;padding:14px 24px;cursor:pointer;text-shadow:0 2px 6px #001;box-shadow:0 2px 12px #0015}
-button:hover{background:rgba(255,215,120,.17);transform:translateY(-2px)}
-#response{min-height:0;font-size:1.1rem;color:var(--gold);text-shadow:0 2px 8px #001}
-footer{font-size:.95rem;text-shadow:0 2px 8px #001;margin-top:8px;padding-bottom:8px}
-.snow{position:fixed;top:-20px;z-index:5;color:white;pointer-events:none;animation:fall linear forwards;text-shadow:0 0 5px white}
-@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2}}
-@media(max-width:520px){
- .hero{padding:22px 8px}
- .subtitle{margin-bottom:28px}
- .timer{gap:9px}
- .num{font-size:clamp(2rem,11vw,3.5rem)}
- .label{letter-spacing:.04em;font-size:.58rem}
- .buttons{margin-top:24px;gap:10px}
- button{padding:12px 15px}
+:root {
+  --gold: #ffda83;
+  --cream: #fff8e8;
+  --night: #07162b;
 }
-@media(min-width:900px){.hero{padding-top:32px}}
+* { box-sizing: border-box; }
+html { min-height: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--cream);
+  font-family: Georgia, "Times New Roman", serif;
+  background:
+    radial-gradient(ellipse at 50% 34%, #244e83 0%, #122c51 36%, transparent 68%),
+    linear-gradient(180deg, #071328 0%, #102b50 55%, #07162b 100%);
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .65;
+  background-image:
+    radial-gradient(2px 2px at 10% 15%, white 50%, transparent 60%),
+    radial-gradient(2px 2px at 25% 38%, white 50%, transparent 60%),
+    radial-gradient(3px 3px at 76% 19%, #ffe9b0 50%, transparent 60%),
+    radial-gradient(2px 2px at 90% 44%, white 50%, transparent 60%),
+    radial-gradient(2px 2px at 61% 10%, white 50%, transparent 60%),
+    radial-gradient(2px 2px at 42% 28%, white 50%, transparent 60%),
+    radial-gradient(3px 3px at 17% 55%, #ffe9b0 50%, transparent 60%);
+  z-index: 0;
+}
+.page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px 32px;
+  text-align: center;
+}
+.eyebrow {
+  color: var(--gold);
+  font: bold .82rem/1.7 Arial, sans-serif;
+  letter-spacing: .27em;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+h1 {
+  font-size: clamp(2.7rem, 8vw, 6.2rem);
+  line-height: .98;
+  letter-spacing: .025em;
+  color: var(--gold);
+  text-shadow: 0 4px 28px #0009, 0 0 35px #ffca6955;
+  margin: 0;
+}
+.subtitle {
+  font-size: clamp(1.05rem, 2.8vw, 1.65rem);
+  line-height: 1.5;
+  margin: 22px 0 8px;
+  color: #fff6e8;
+}
+.status {
+  font: bold .78rem Arial, sans-serif;
+  letter-spacing: .22em;
+  color: #ffdb87;
+  margin: 8px 0 30px;
+}
+.section-title {
+  color: var(--gold);
+  font-size: clamp(1.35rem, 4vw, 2.3rem);
+  line-height: 1.25;
+  margin: 0 0 22px;
+}
+.countdown {
+  width: min(850px, 100%);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(7px, 2vw, 18px);
+}
+.unit {
+  min-width: 0;
+  padding: clamp(14px, 3vw, 26px) 5px 18px;
+  border: 1px solid #f7d68b99;
+  border-radius: 17px;
+  background: linear-gradient(155deg, #183d5ddd, #07192ceF);
+  box-shadow: 0 9px 28px #0005, inset 0 0 22px #f5d58b0d;
+}
+.number {
+  display: block;
+  color: #fff;
+  font: 800 clamp(2rem, 7.5vw, 5.1rem)/1 Arial, sans-serif;
+  letter-spacing: -.045em;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 15px #0009;
+}
+.label {
+  display: block;
+  margin-top: 12px;
+  color: var(--gold);
+  font: bold clamp(.62rem, 1.8vw, .9rem) Arial, sans-serif;
+  letter-spacing: .12em;
+}
+.magic {
+  color: var(--gold);
+  font-size: clamp(1.15rem, 3vw, 1.75rem);
+  font-style: italic;
+  margin: 28px 0 0;
+}
+.note {
+  color: #d6e2f4;
+  font: .8rem/1.6 Arial, sans-serif;
+  margin: 14px 0 0;
+}
+.scene {
+  position: fixed;
+  z-index: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 155px;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: .95;
+}
+.hill {
+  position: absolute;
+  bottom: -95px;
+  width: 75vw;
+  height: 175px;
+  background: linear-gradient(#f8f4e8, #c9d9ed);
+  border-radius: 50% 50% 0 0;
+}
+.hill.left { left: -25vw; }
+.hill.right { right: -25vw; width: 85vw; }
+.tree {
+  position: absolute;
+  bottom: 22px;
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 100px solid #123f39;
+  filter: drop-shadow(0 3px 5px #0007);
+}
+.tree::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: -23px;
+  border-left: 23px solid transparent;
+  border-right: 23px solid transparent;
+  border-bottom: 72px solid #1b5b49;
+}
+.tree::after {
+  content: "✦";
+  position: absolute;
+  color: var(--gold);
+  font-size: 17px;
+  top: 18px;
+  left: -7px;
+}
+.t1 { left: 7%; transform: scale(.95); }
+.t2 { left: 17%; transform: scale(.65); bottom: 10px; }
+.t3 { right: 8%; transform: scale(1.05); }
+.t4 { right: 19%; transform: scale(.7); bottom: 9px; }
+.snow {
+  position: fixed;
+  inset: -20px 0 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+.flake {
+  position: absolute;
+  top: -20px;
+  left: var(--x);
+  color: white;
+  opacity: var(--o);
+  font-size: var(--s);
+  animation: fall var(--d) linear var(--delay) infinite;
+}
+@keyframes fall {
+  to { transform: translate3d(var(--drift), 110vh, 0) rotate(360deg); }
+}
+@media (max-width: 480px) {
+  .page { justify-content: flex-start; padding-top: 65px; }
+  .eyebrow { font-size: .68rem; letter-spacing: .15em; }
+  .countdown { gap: 6px; }
+  .unit { border-radius: 12px; padding: 16px 2px 13px; }
+  .number { font-size: clamp(1.55rem, 8vw, 2.5rem); }
+  .label { letter-spacing: .04em; }
+  .section-title { margin-bottom: 18px; }
+  .scene { height: 100px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flake { animation: none; display: none; }
+}
 </style>
 </head>
 <body>
-<main class="hero">
-<img class="scene" src="christmas-wonderland.png" alt="">
-<p class="kicker">✦ THE MOST WONDERFUL TIME OF THE YEAR ✦</p>
-<h1>🎄 CHRISTMAS COUNTDOWN 🎄</h1>
-<p class="subtitle">The most wonderful time of the year!</p>
+<div class="snow" id="snow" aria-hidden="true"></div>
 
-<h2>UNTIL CHRISTMAS DAY</h2>
-<div class="timer" aria-label="Time until Christmas">
-<div class="unit"><span class="num" id="days">000</span><span class="label">DAYS</span></div>
-<div class="unit"><span class="num" id="hours">00</span><span class="label">HOURS</span></div>
-<div class="unit"><span class="num" id="minutes">00</span><span class="label">MINUTES</span></div>
-<div class="unit"><span class="num" id="seconds">00</span><span class="label">SECONDS</span></div>
+<div class="scene" aria-hidden="true">
+  <div class="hill left"></div>
+  <div class="hill right"></div>
+  <div class="tree t1"></div>
+  <div class="tree t2"></div>
+  <div class="tree t3"></div>
+  <div class="tree t4"></div>
 </div>
-<p class="magic">✦ Believe in the magic of Christmas ✦</p>
 
-<div class="buttons">
-<button id="surpriseButton">🎁 Christmas Surprise</button>
-<button id="wishButton">✨ Christmas Wish</button>
-</div>
-<div id="response" aria-live="polite"></div>
-<footer>— 🎄 —<br><br>Made with Christmas magic ❤️</footer>
+<main class="page">
+  <p class="eyebrow">✦ The most wonderful time of the year ✦</p>
+  <h1>CHRISTMAS<br>COUNTDOWN</h1>
+  <p class="subtitle">The most wonderful time of the year!</p>
+  <p class="status">✦ SANTA IS GETTING READY ✦</p>
+
+  <h2 class="section-title">Until Christmas Day</h2>
+
+  <section class="countdown" aria-label="Time remaining until Christmas">
+    <div class="unit">
+      <span class="number" id="days">000</span>
+      <span class="label">DAYS</span>
+    </div>
+    <div class="unit">
+      <span class="number" id="hours">00</span>
+      <span class="label">HOURS</span>
+    </div>
+    <div class="unit">
+      <span class="number" id="minutes">00</span>
+      <span class="label">MINUTES</span>
+    </div>
+    <div class="unit">
+      <span class="number" id="seconds">00</span>
+      <span class="label">SECONDS</span>
+    </div>
+  </section>
+
+  <p class="magic">✦ Believe in the magic of Christmas ✦</p>
+  <p class="note">Counting down to midnight on 25 December · UK time</p>
 </main>
+
 <script>
 "use strict";
 
-// Find the next midnight on 25 December in the Europe/London timezone.
-function londonParts(date){
-  const parts=new Intl.DateTimeFormat("en-GB",{
-    timeZone:"Europe/London",
-    year:"numeric",month:"numeric",day:"numeric",
-    hour:"numeric",minute:"numeric",second:"numeric",
-    hourCycle:"h23"
-  }).formatToParts(date);
-  const out={};
-  for(const p of parts)if(p.type!=="literal")out[p.type]=Number(p.value);
-  return out;
-}
+// Christmas begins at 00:00 UK time on 25 December.
+// The UK is on GMT on Christmas Day, so UTC midnight is correct.
+function getNextChristmas() {
+  const now = new Date();
+  let year = Number(
+    new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Europe/London",
+      year: "numeric"
+    }).format(now)
+  );
 
-function londonMidnight(year,month,day){
-  const wanted=Date.UTC(year,month-1,day,0,0,0);
-  let guess=wanted;
-  for(let i=0;i<5;i++){
-    const p=londonParts(new Date(guess));
-    const shown=Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second);
-    const adjustment=wanted-shown;
-    guess+=adjustment;
-    if(adjustment===0)break;
+  let target = Date.UTC(year, 11, 25, 0, 0, 0);
+
+  if (now.getTime() >= target) {
+    year += 1;
+    target = Date.UTC(year, 11, 25, 0, 0, 0);
   }
-  return guess;
-}
-
-function nextChristmas(){
-  const now=Date.now();
-  let year=londonParts(new Date(now)).year;
-  let target=londonMidnight(year,12,25);
-  if(now>=target)target=londonMidnight(year+1,12,25);
   return target;
 }
 
-function updateCountdown(){
-  const ms=Math.max(0,nextChristmas()-Date.now());
-  const d=Math.floor(ms/86400000);
-  const h=Math.floor((ms%86400000)/3600000);
-  const m=Math.floor((ms%3600000)/60000);
-  const s=Math.floor((ms%60000)/1000);
-  document.getElementById("days").textContent=String(d).padStart(3,"0");
-  document.getElementById("hours").textContent=String(h).padStart(2,"0");
-  document.getElementById("minutes").textContent=String(m).padStart(2,"0");
-  document.getElementById("seconds").textContent=String(s).padStart(2,"0");
-  if(ms===0)document.querySelector("h2").textContent="🎄 MERRY CHRISTMAS! 🎄";
+let targetTime = getNextChristmas();
+
+function updateCountdown() {
+  const now = Date.now();
+
+  // Switch to next year's Christmas immediately after reaching zero.
+  if (now >= targetTime) {
+    targetTime = getNextChristmas();
+  }
+
+  let remaining = Math.max(0, targetTime - now);
+  const days = Math.floor(remaining / 86400000);
+  remaining %= 86400000;
+  const hours = Math.floor(remaining / 3600000);
+  remaining %= 3600000;
+  const minutes = Math.floor(remaining / 60000);
+  const seconds = Math.floor((remaining % 60000) / 1000);
+
+  document.getElementById("days").textContent = String(days).padStart(3, "0");
+  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
 }
+
 updateCountdown();
-setInterval(updateCountdown,1000);
+setInterval(updateCountdown, 1000);
 
-const surprises=[
-"🎅 Santa's workshop is getting ready!",
-"❄️ Wishing you a magical, snowy Christmas!",
-"🎁 The best gifts are the memories we make.",
-"✨ Christmas magic is all around you!"
-];
-const wishes=[
-"❤️ May your home be full of love and laughter.",
-"🌟 May your Christmas wishes come true!",
-"🎄 Wishing you peace, joy and wonderful memories.",
-"✨ May your holidays sparkle with happiness!"
-];
-document.getElementById("surpriseButton").onclick=()=>{
- document.getElementById("response").textContent=surprises[Math.floor(Math.random()*surprises.length)];
-};
-document.getElementById("wishButton").onclick=()=>{
- document.getElementById("response").textContent=wishes[Math.floor(Math.random()*wishes.length)];
-};
-
-function snowflake(){
- const f=document.createElement("span");
- f.className="snow";f.textContent="❄";
- f.style.left=Math.random()*100+"vw";
- f.style.fontSize=(10+Math.random()*14)+"px";
- const duration=5+Math.random()*7;
- f.style.animationDuration=duration+"s";
- document.body.appendChild(f);
- setTimeout(()=>f.remove(),duration*1000);
+// Generate decorative snowflakes without installing any libraries.
+const snow = document.getElementById("snow");
+for (let i = 0; i < 38; i++) {
+  const flake = document.createElement("span");
+  flake.className = "flake";
+  flake.textContent = i % 4 === 0 ? "❄" : "•";
+  flake.style.setProperty("--x", Math.random() * 100 + "%");
+  flake.style.setProperty("--s", (8 + Math.random() * 13) + "px");
+  flake.style.setProperty("--o", (0.3 + Math.random() * 0.65).toFixed(2));
+  flake.style.setProperty("--d", (8 + Math.random() * 14) + "s");
+  flake.style.setProperty("--delay", (-Math.random() * 20) + "s");
+  flake.style.setProperty("--drift", (-50 + Math.random() * 100) + "px");
+  snow.appendChild(flake);
 }
-setInterval(snowflake,400);
 </script>
 </body>
 </html>
+EOF
